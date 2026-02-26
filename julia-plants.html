@@ -90,6 +90,10 @@
     <span> Дополнительно </span>
     <textarea id="inputExtra"></textarea>
   </label>
+
+  <div>
+    <a id="download" href="">Скачать</a>
+  </div>
 </div>
 <script async>
   const createImageFromElement = (elementId) => {
@@ -119,6 +123,7 @@
   const inputLight = document.getElementById('inputLight')
   const petDangerInput = document.getElementById('petDangerInput')
   const inputExtra = document.getElementById('inputExtra')
+  const download = document.getElementById('download')
 
   const context = canvas.getContext('2d')
 
@@ -202,6 +207,12 @@
 
       context.fillText(`${ partOne }`, width / 2, height - (fontNameSizeSmall / 2 + padding + fontNameSizeSmall * 2), width - padding * 2)
     }
+
+    setTimeout(() => {
+      download.download = 'PlantBadge.png';
+      download.href = canvas.toDataURL('image/png');
+      download.dataset.downloadurl = ['image/png', download.download, download.href].join(':')
+    }, 100)
   }
 
   [inputName, inputWater, inputLight, petDangerInput, inputExtra].forEach(each => each.addEventListener('input', render))
